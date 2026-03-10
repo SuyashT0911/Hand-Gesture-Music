@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hand Gesture Music Player</title>
+    <!-- Modern Font -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- MediaPipe Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div class="app-container">
+      <!-- Hidden video element to capture webcam -->
+      <video class="input_video" style="display: none"></video>
+
+      <!-- Canvas for drawing video and hand landmarks -->
+      <canvas class="output_canvas" width="1280" height="720"></canvas>
+
+      <!-- UI Overlay -->
+      <div class="ui-layer">
+        <header>
+          <h1 class="title">
+            Gesturio <span class="subtitle">Hand-Tracking Music</span>
+          </h1>
+        </header>
+
+        <div class="notes-container">
+          <!-- Right Hand Notes -->
+          <div class="hand-section right-hand">
+            <h2>Right Hand (Lower Notes)</h2>
+            <div class="notes-row">
+              <div class="note-card" id="note-do-1">
+                <div class="note-name">Do</div>
+                <div class="finger-name">Index</div>
+              </div>
+              <div class="note-card" id="note-re">
+                <div class="note-name">Re</div>
+                <div class="finger-name">Middle</div>
+              </div>
+              <div class="note-card" id="note-mi">
+                <div class="note-name">Mi</div>
+                <div class="finger-name">Ring</div>
+              </div>
+              <div class="note-card" id="note-fa">
+                <div class="note-name">Fa</div>
+                <div class="finger-name">Pinky</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Left Hand Notes -->
+          <div class="hand-section left-hand">
+            <h2>Left Hand (Higher Notes)</h2>
+            <div class="notes-row">
+              <div class="note-card" id="note-so">
+                <div class="note-name">So</div>
+                <div class="finger-name">Index</div>
+              </div>
+              <div class="note-card" id="note-la">
+                <div class="note-name">La</div>
+                <div class="finger-name">Middle</div>
+              </div>
+              <div class="note-card" id="note-ti">
+                <div class="note-name">Ti</div>
+                <div class="finger-name">Ring</div>
+              </div>
+              <div class="note-card" id="note-do-2">
+                <div class="note-name">Do</div>
+                <div class="finger-name">Pinky</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dynamic Status Display -->
+        <div class="status-bar">
+          <div id="status-text">Show your hands to the camera</div>
+        </div>
+
+        <!-- Start Screen / Modal -->
+        <div id="start-screen" class="overlay">
+          <div class="modal">
+            <h2>Welcome to Gesturio</h2>
+            <p>
+              Make sure your webcam is enabled. Play the Diatonic Scale by
+              pinching your thumb with your other fingers.
+            </p>
+            <ul class="instructions-list">
+              <li><strong>Right Hand:</strong> Do, Re, Mi, Fa</li>
+              <li><strong>Left Hand:</strong> So, La, Ti, Do</li>
+            </ul>
+            <button id="start-btn">Start Playing</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
